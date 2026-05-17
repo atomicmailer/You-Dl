@@ -330,18 +330,42 @@ jobs:
                   print(f'   ❌ Download error: {e}')
               return 0
 
+
           def split_file(filepath, threshold_mb):
               size_mb = filepath.stat().st_size / 1e6
-              if threshold_mb > 0 and size_mb > threshold_mb:
-                  print(f'   ✂️ Splitting ({size_mb:.0f}MB) into {threshold_mb}MB parts...')
-                  parent = filepath.parent
-                  name = filepath.name
-                  subprocess.run(['split', '-b', '50M', '--numeric-suffixes=1','--suffix-length=3' , f'{name}', f'{name}.mp4.part_'], cwd=parent, check=True)
-                  filepath.unlink()
-                  parts = sorted(parent.glob(f'{name}.mp4.part_*'))
-                  print(f'   ✅ Split into {len(parts)} parts')
-                  return True
-              return False
+          
+              if threshold_mb <= 0:
+                  return False
+          
+              if size_mb <= threshold_mb:
+                  return False
+          
+              print(f'✂️ splitting {size_mb:.1f}MB file...')
+          
+              parent = filepath.parent
+              name = filepath.name
+          
+              subprocess.run([
+                  "split",
+                  "-b", f"{threshold_mb}M",
+                  "--numeric-suffixes=1",
+                  "--suffix-length=3",
+                  str(filepath),
+                  str(parent / (name + ".part_"))
+              ], check=True)
+          
+              filepath.unlink()
+          
+              print("✅ split done (non-zip mode)")
+              return True
+          
+          filepath.unlink()
+
+          print("✅ split done (non-zip mode)")
+          return True
+
+
+
 
           print(f'{"="*50}')
           print(f'🎬 {M.upper()} MODE')
