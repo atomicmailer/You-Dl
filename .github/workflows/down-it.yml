@@ -68,7 +68,6 @@ jobs:
         run: |
           python3 -c "import requests" 2>/dev/null || pip3 install -q requests
           command -v yt-dlp &>/dev/null || pip3 install -q yt-dlp
-          command -v zip &>/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq zip)
 
       - name: 🔗 Prepare
         id: prep
@@ -358,14 +357,6 @@ jobs:
           
               print("✅ split done (non-zip mode)")
               return True
-          
-          filepath.unlink()
-
-          print("✅ split done (non-zip mode)")
-          return True
-
-
-
 
           print(f'{"="*50}')
           print(f'🎬 {M.upper()} MODE')
