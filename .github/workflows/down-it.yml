@@ -29,7 +29,7 @@ on:
         description: 'Quality (video: 144/360/480/720/1080 | audio: 128/192/320)'
         required: false
         type: string
-        default: '720'
+        default: '480'
       max_videos:
         description: '🔢 Max results'
         required: false
@@ -39,7 +39,7 @@ on:
         description: '📦 Split > MB (0=no)'
         required: false
         type: number
-        default: 50
+        default: 20
 
 env:
   PYTHONUNBUFFERED: '1'
