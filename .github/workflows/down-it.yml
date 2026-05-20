@@ -97,9 +97,9 @@ jobs:
           M = os.environ['MODE']
           U = os.environ['URL']
           T = os.environ['TYPE']
-          Q = os.environ.get('QUALITY', '720')
+          Q = os.environ.get('QUALITY', '480')
           MX = int(os.environ.get('MAX', '10'))
-          SP = int(os.environ.get('SPLIT', '25'))
+          SP = int(os.environ.get('SPLIT', '20'))
 
           API = 'https://hub.ytconvert.org/api/download'
           H = {
