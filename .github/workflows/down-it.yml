@@ -99,7 +99,7 @@ jobs:
           T = os.environ['TYPE']
           Q = os.environ.get('QUALITY', '720')
           MX = int(os.environ.get('MAX', '10'))
-          SP = int(os.environ.get('SPLIT', '50'))
+          SP = int(os.environ.get('SPLIT', '25'))
 
           API = 'https://hub.ytconvert.org/api/download'
           H = {
